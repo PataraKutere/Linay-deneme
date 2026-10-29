@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171321">
+  <meta name="description" content="Linay — tarot, kahve ve günlük fal için ücretsiz arkadaş test sürümü.">
+  <title>Linay — İçinden geçenlere bir işaret</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap');
+:root{--bg:#111019;--panel:#1b1925;--panel2:#242130;--text:#f6f1eb;--muted:#b5adbf;--gold:#e5c58b;--pink:#c9a0b6;--line:#393342}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#34283d 0%,var(--bg) 50%);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}button,a,textarea,input{font:inherit}button{cursor:pointer}.app-shell{max-width:960px;margin:auto;padding:0 22px 96px}.topbar{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff0c}.brand{font-size:25px;font-weight:700;letter-spacing:-1.4px;color:var(--text);text-decoration:none}.brand-mark{color:var(--gold);font-size:24px;margin-right:5px}.test-pill{font-size:10px;letter-spacing:1.5px;color:var(--gold);border:1px solid #e5c58b55;border-radius:99px;padding:8px 11px}.hero{position:relative;padding:56px 0 35px;min-height:265px;overflow:hidden}.eyebrow{font-size:10px;letter-spacing:2px;color:var(--gold);font-weight:700}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(38px,8vw,63px);line-height:1.08;letter-spacing:-1.4px;margin:17px 0 14px;font-weight:500;position:relative;z-index:1}.hero h1 em{color:var(--gold);font-weight:500}.hero p{max-width:390px;line-height:1.7;color:var(--muted);font-size:14px;position:relative;z-index:1}.moon-art{position:absolute;right:5%;top:36px;width:170px;height:170px;border:1px solid #e5c58b22;border-radius:50%;display:grid;place-items:center;color:var(--gold);opacity:.85}.moon-art:before,.moon-art:after{content:"";position:absolute;border:1px solid #e5c58b27;border-radius:50%;inset:12px}.moon-art:after{inset:27px}.moon-art span{font-size:100px;transform:rotate(-20deg);font-family:serif}.moon-art i{position:absolute;right:22px;top:25px;font-size:23px;font-style:normal}.moon-art b{position:absolute;left:25px;bottom:34px;font-size:26px;font-weight:400}.moon-art small{position:absolute;right:35px;bottom:22px;font-size:20px}@media(max-width:620px){.moon-art{width:105px;height:105px;right:-18px;top:43px;opacity:.55}.moon-art span{font-size:68px}.moon-art:before{inset:8px}.moon-art:after{inset:17px}.hero{padding-top:43px;min-height:250px}.hero p{max-width:280px}}
+.notice{display:flex;gap:12px;align-items:flex-start;padding:15px 16px;border:1px solid #e5c58b2c;background:#e5c58b0b;border-radius:13px;margin:4px 0 39px}.notice-icon{color:var(--gold);font-size:19px}.notice p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.notice strong{color:var(--text);font-weight:600}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:17px}.section-head h2,.reader h2{font-size:22px;font-weight:500;letter-spacing:-.6px;margin:8px 0 0}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.feature-card{position:relative;text-align:left;min-height:202px;border-radius:16px;border:1px solid var(--line);padding:19px 17px;background:linear-gradient(145deg,#262132,#191721);color:var(--text);display:flex;flex-direction:column;align-items:flex-start;transition:transform .2s,border-color .2s}.feature-card:hover{transform:translateY(-3px);border-color:#e5c58b77}.feature-card.coffee{background:linear-gradient(145deg,#34272b,#1b1925)}.feature-card.daily{background:linear-gradient(145deg,#282b3c,#1b1925)}.card-icon{font-size:29px;color:var(--gold);margin-bottom:18px}.coffee .card-icon{color:var(--pink)}.daily .card-icon{color:#b9c5f0}.card-label{font-size:9px;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px}.feature-card strong{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;margin-bottom:8px}.card-desc{font-size:11px;line-height:1.5;color:var(--muted)}.card-arrow{position:absolute;right:15px;top:14px;color:var(--gold);font-size:17px}@media(max-width:620px){.cards{grid-template-columns:1fr;gap:10px}.feature-card{min-height:140px;padding:17px 17px 17px 78px;justify-content:center}.card-icon{position:absolute;left:20px;top:26px;font-size:32px}.card-label{margin:0 0 6px}.feature-card strong{font-size:20px;margin-bottom:5px}}
+.reader{margin-top:32px;padding:21px;border:1px solid #e5c58b44;border-radius:18px;background:linear-gradient(145deg,#211d2c,#17151f)}.reader-top{display:flex;align-items:start;justify-content:space-between;margin-bottom:21px}.icon-button{border:1px solid var(--line);background:transparent;color:var(--text);width:34px;height:34px;border-radius:50%;font-size:22px}.reader label{display:block;font-size:12px;color:#e4dce9;margin:0 0 9px}.reader textarea{display:block;width:100%;min-height:94px;resize:vertical;background:#100f17;border:1px solid var(--line);border-radius:10px;padding:13px;color:var(--text);outline:none}.reader textarea:focus{border-color:var(--gold)}.upload-area{margin-top:18px}.upload-area input{width:100%;font-size:12px;color:var(--muted)}.upload-area small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:8px}.photo-preview{max-width:100%;max-height:220px;object-fit:contain;margin-top:12px;border-radius:10px;border:1px solid var(--line)}.primary-button{margin-top:19px;border:0;border-radius:10px;background:var(--gold);color:#231c24;font-weight:700;padding:13px 17px;width:100%;display:flex;justify-content:center;gap:10px}.primary-button span{font-size:15px}.result{margin-top:20px;padding:19px;border-radius:12px;background:#ffffff07;border:1px solid #ffffff12}.result h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:500;margin:0 0 12px;color:var(--gold)}.result p{font-size:13px;line-height:1.8;color:#e4dce9}.result .disclaimer{font-size:10px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:16px}.hidden{display:none!important}.history-section{margin-top:44px}.text-button{background:none;border:0;color:var(--gold);font-size:11px}.history-list{display:grid;gap:9px}.history-item{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px 15px;background:#ffffff05;border:1px solid #ffffff12;border-radius:11px}.history-item strong{display:block;font-size:13px;font-weight:600}.history-item span{display:block;color:var(--muted);font-size:10px;margin-top:5px}.history-item button{border:1px solid var(--line);background:transparent;color:var(--gold);border-radius:8px;padding:7px 10px;font-size:11px;white-space:nowrap}.empty-state{font-size:12px;color:var(--muted);padding:18px;border:1px dashed var(--line);border-radius:12px;text-align:center;line-height:1.7}footer{border-top:1px solid #ffffff12;margin-top:45px;padding:25px 0 5px}.footer-brand{font-weight:700;font-size:19px;color:var(--gold)}footer p{max-width:560px;font-size:10px;line-height:1.7;color:var(--muted)}footer>span{font-size:10px;color:#81788c}.bottom-nav{display:none}@media(max-width:620px){.app-shell{padding:0 17px 100px}.bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;justify-content:space-around;gap:5px;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:#17151ff2;backdrop-filter:blur(18px);border-top:1px solid #ffffff15}.bottom-nav a,.bottom-nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--muted);text-decoration:none;background:none;border:0;font-size:9px}.bottom-nav span{font-size:19px;color:var(--gold)}.bottom-nav .active{color:var(--text)}}
+
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Linay ana sayfa"><span class="brand-mark">✦</span> linay</a>
+      <span class="test-pill">ÜCRETSİZ TEST</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">KENDİNE KÜÇÜK BİR ALAN AÇ</div>
+        <h1>İçinden geçenlere<br><em>bir işaret.</em></h1>
+        <p>Bir an dur, niyetini belirle ve Linay’ın sembolik yorumlarına göz at.</p>
+        <div class="moon-art" aria-hidden="true"><span>☾</span><i>✦</i><b>·</b><small>✧</small></div>
+      </section>
+
+      <section class="notice">
+        <span class="notice-icon">ⓘ</span>
+        <p><strong>Arkadaş test sürümü</strong><br>Yorumlar demo amaçlıdır; gerçek yapay zekâ analizi veya kesin gelecek tahmini değildir.</p>
+      </section>
+
+      <section class="section-head">
+        <div><div class="eyebrow">KEŞFET</div><h2>Bugün neye ihtiyacın var?</h2></div>
+      </section>
+
+      <section class="cards">
+        <button class="feature-card tarot" data-open="tarot">
+          <span class="card-icon">✧</span><span class="card-label">TAROT</span>
+          <strong>Kartların mesajı</strong><span class="card-desc">Üç kartlık sembolik açılım</span><span class="card-arrow">↗</span>
+        </button>
+        <button class="feature-card coffee" data-open="coffee">
+          <span class="card-icon">◒</span><span class="card-label">KAHVE FALI</span>
+          <strong>Fincanındaki izler</strong><span class="card-desc">Fotoğraf seç, niyetini yaz</span><span class="card-arrow">↗</span>
+        </button>
+        <button class="feature-card daily" data-open="daily">
+          <span class="card-icon">☼</span><span class="card-label">GÜNLÜK FAL</span>
+          <strong>Günün küçük notu</strong><span class="card-desc">Kendine ayırdığın bir dakika</span><span class="card-arrow">↗</span>
+        </button>
+      </section>
+
+      <section id="reader" class="reader hidden" aria-live="polite">
+        <div class="reader-top"><div><div class="eyebrow" id="reader-eyebrow">LINAY</div><h2 id="reader-title">Yorumunu hazırla</h2></div><button id="close-reader" class="icon-button" aria-label="Kapat">×</button></div>
+        <form id="reading-form">
+          <label for="intention">Niyetin veya sorun (isteğe bağlı)</label>
+          <textarea id="intention" maxlength="240" placeholder="Aklından geçenleri birkaç kelimeyle yaz…"></textarea>
+          <div id="coffee-upload" class="upload-area hidden">
+            <label for="coffee-photo">Fincan fotoğrafı (isteğe bağlı)</label>
+            <input id="coffee-photo" type="file" accept="image/*">
+            <img id="photo-preview" class="photo-preview hidden" alt="Seçtiğin fincan fotoğrafının önizlemesi">
+            <small>Fotoğraf yalnızca bu ekranda önizlenir; yüklenmez ve analiz edilmez.</small>
+          </div>
+          <button class="primary-button" type="submit">Ücretsiz yorumla <span>✦</span></button>
+        </form>
+        <div id="result" class="result hidden"></div>
+      </section>
+
+      <section class="history-section">
+        <div class="section-head"><div><div class="eyebrow">SANA ÖZEL</div><h2>Son yorumların</h2></div><button id="clear-history" class="text-button">Temizle</button></div>
+        <div id="history" class="history-list"><p class="empty-state">Henüz bir yorumun yok. İlk açılımını yapınca burada görünecek.</p></div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-brand">✦ linay</div>
+      <p>Linay bir eğlence ve kişisel düşünme deneyimidir. Sağlık, hukuk, finans veya önemli yaşam kararlarında profesyonel desteğin yerini tutmaz.</p>
+      <span>Arkadaş test sürümü · v0.1</span>
+    </footer>
+  </div>
+  <nav class="bottom-nav" aria-label="Alt menü">
+    <a class="active" href="#"><span>⌂</span>Ana sayfa</a>
+    <button data-nav="tarot"><span>✧</span>Tarot</button>
+    <button data-nav="coffee"><span>◒</span>Kahve</button>
+    <button data-nav="history"><span>▤</span>Geçmiş</button>
+  </nav>
+  <script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const reader = $("#reader"), form = $("#reading-form"), result = $("#result");
+  const intention = $("#intention"), upload = $("#coffee-upload"), photo = $("#coffee-photo"), preview = $("#photo-preview");
+  let currentType = "daily";
+  const titles = {tarot:"Kartların mesajı", coffee:"Fincanındaki izler", daily:"Günün küçük notu"};
+  const labels = {tarot:"TAROT AÇILIMI", coffee:"KAHVE FALI", daily:"GÜNLÜK FAL"};
+  const copy = {
+    tarot: [
+      ["Denge", "Bugün aceleyle karar vermek yerine iki tarafı da dinlemek sana iyi gelebilir. Gücün, karşıt görünen şeyler arasında kendi ritmini bulmakta."],
+      ["Yıldız", "Küçük bir umut yeniden görünür olabilir. Her şeyi bir anda çözmek zorunda değilsin; atacağın tek bir gerçekçi adım bile yönünü netleştirebilir."],
+      ["Yol", "Önünde birden fazla seçenek varmış gibi hissedebilirsin. Hangisinin sana daha yakın olduğunu anlamak için başkalarının beklentilerinden biraz uzaklaş."]
+    ],
+    coffee: [
+      ["Fincanın sembolik yorumu", "Bu yorum gerçek fotoğraf analizi değildir. Fincanındaki şekilleri kendin tarif edersen onları sembolik bir hikâyeye dönüştürebilirsin. Bugün küçük bir konuşma veya ertelediğin bir iş için alan açmayı düşünebilirsin."],
+      ["Biriken düşünceler", "Kahve falı geleneğinde yollar hareketi, kuşlar haberleri, kalp ise yakınlığı çağrıştırır. Bunlar kesin işaretler değil; sende hangi duyguyu uyandırdıklarını düşünmek için bir başlangıç olabilir."]
+    ],
+    daily: [
+      ["Bugünün notu", "Her şeye aynı anda yetişmek zorunda değilsin. Bugün tamamlayabileceğin tek bir şeyi seç ve ona hakkını ver. Kendine gösterdiğin sabır da ilerlemenin bir parçası."],
+      ["Küçük bir hatırlatma", "Bir cevap hemen gelmiyorsa bu, hiçbir şeyin değişmediği anlamına gelmez. Biraz alan bırak ve kontrol edebildiğin küçük adımlara dön."]
+    ]
+  };
+  function loadHistory() {
+    try { return JSON.parse(localStorage.getItem("linay-history") || "[]"); } catch { return []; }
+  }
+  function saveHistory(items) {
+    try { localStorage.setItem("linay-history", JSON.stringify(items.slice(0, 12))); } catch {}
+  }
+  function open(type) {
+    currentType = type;
+    $("#reader-eyebrow").textContent = labels[type];
+    $("#reader-title").textContent = titles[type];
+    upload.classList.toggle("hidden", type !== "coffee");
+    result.classList.add("hidden");
+    intention.value = "";
+    reader.classList.remove("hidden");
+    reader.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+  function renderHistory() {
+    const history = loadHistory(), root = $("#history");
+    if (!history.length) {
+      root.innerHTML = '<p class="empty-state">Henüz bir yorumun yok. İlk açılımını yapınca burada görünecek.</p>';
+      return;
+    }
+    root.innerHTML = history.map((item, i) => `
+      <div class="history-item">
+        <div><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.date)}</span></div>
+        <button type="button" data-history="${i}">Yorumu aç</button>
+      </div>`).join("");
+    root.querySelectorAll("[data-history]").forEach(btn => btn.addEventListener("click", () => {
+      const item = loadHistory()[Number(btn.dataset.history)];
+      if (!item) return;
+      result.innerHTML = `<h3>${escapeHtml(item.heading)}</h3><p>${escapeHtml(item.content)}</p><p class="disclaimer">Demo amaçlı sembolik yorumdur; kesin gelecek tahmini değildir.</p>`;
+      result.classList.remove("hidden");
+      reader.classList.remove("hidden");
+      $("#reader-title").textContent = item.title;
+      reader.scrollIntoView({behavior:"smooth", block:"start"});
+    }));
+  }
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+  }
+  document.querySelectorAll("[data-open]").forEach(btn => btn.addEventListener("click", () => open(btn.dataset.open)));
+  document.querySelectorAll("[data-nav]").forEach(btn => btn.addEventListener("click", () => {
+    if (btn.dataset.nav === "history") $("#history").scrollIntoView({behavior:"smooth"});
+    else open(btn.dataset.nav);
+  }));
+  $("#close-reader").addEventListener("click", () => reader.classList.add("hidden"));
+  $("#clear-history").addEventListener("click", () => {
+    if (confirm("Bu cihazdaki Linay yorum geçmişi silinsin mi?")) {
+      saveHistory([]); renderHistory();
+    }
+  });
+  photo.addEventListener("change", () => {
+    const file = photo.files && photo.files[0];
+    if (!file) { preview.classList.add("hidden"); preview.removeAttribute("src"); return; }
+    if (!file.type.startsWith("image/")) { alert("Lütfen bir görsel dosyası seç."); photo.value = ""; return; }
+    const url = URL.createObjectURL(file);
+    preview.src = url; preview.classList.remove("hidden");
+  });
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const options = copy[currentType];
+    const picked = options[Math.floor(Math.random() * options.length)];
+    const note = intention.value.trim();
+    let content = picked[1];
+    if (currentType === "coffee" && note) content += ` Yazdığın niyet üzerine düşünmek için bir soru: “${note}” konusunda atabileceğin en küçük somut adım ne olabilir?`;
+    if (currentType !== "coffee" && note) content += ` Niyetin “${note}” ise, bu konudaki kontrol edebildiğin küçük bir adıma odaklanmayı deneyebilirsin.`;
+    result.innerHTML = `<h3>${escapeHtml(picked[0])}</h3><p>${escapeHtml(content)}</p><p class="disclaimer">Bu, Linay’ın ücretsiz test sürümündeki örnek yorumudur. Gerçek yapay zekâ analizi değildir; kesin gelecek tahmini veya profesyonel tavsiye sayılmaz.</p>`;
+    result.classList.remove("hidden");
+    const history = loadHistory();
+    history.unshift({type:currentType,title:titles[currentType],heading:picked[0],content,date:new Date().toLocaleString("tr-TR")});
+    saveHistory(history); renderHistory();
+  });
+  renderHistory();
+})();
+
+  </script>
+</body>
+</html>
+
