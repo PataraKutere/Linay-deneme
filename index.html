@@ -294,148 +294,43 @@
       saveHistory([]); renderHistory();
     }
   });
-  
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzaSuE3dMweaVa2SaBkEZajvhN0dSbFou8pfbE8hjK3XJiTBfIBLk5oCt3SHAOVsvFkGA/exec";
-
-  function photoToBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result.split(",")[1]);
-      reader.onerror = () => reject(new Error("Fotoğraf okunamadı."));
-      reader.readAsDataURL(file);
-    });
-  }
-
-  form.addEventListener("submit", async (event) => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
-
     const note = intention.value.trim();
     let picked, historyTitle = titles[currentType];
-
     if (currentType === "coffee" || currentType === "hand") {
       const requiredSlot = currentType === "coffee" ? "cup1" : "palm";
+      if (!approvedPhotos[requiredSlot]) {
+        alert(currentType === "coffee" ? "Kahve falı için Fincan 1 fotoğrafını ekle ve onayla." : "El falı için avuç içi fotoğrafını ekle ve onayla.");
+        return;
+      }
       const requiredPhoto = approvedPhotos[requiredSlot];
-
-      if (!requiredPhoto) {
-        alert(currentType === "coffee"
-          ? "Fincan 1 fotoğrafını ekleyip onayla."
-          : "Avuç içi fotoğrafını ekleyip onayla.");
-        return;
-      }
-
-      if (!requiredPhoto.type.startsWith("image/")) {
-        alert("Geçerli bir fotoğraf seçmelisin.");
-        return;
-      }
-
-      const submitButton = form.querySelector('[type="submit"]');
-      const originalText = submitButton.innerHTML;
-
-      try {
-        submitButton.disabled = true;
-        submitButton.textContent = "Fotoğrafın analiz ediliyor...";
-
-        result.classList.remove("hidden");
-        result.innerHTML = "<p>Linay fotoğrafını inceliyor. Biraz bekle...</p>";
-
-        const image = await photoToBase64(requiredPhoto);
-
-        const response = await fetch(WEB_APP_URL, {
-          method: "POST",
-          body: JSON.stringify({
-            type: currentType,
-            image: image,
-            mimeType: requiredPhoto.type,
-            intention: note
-          })
-        });
-
-        const data = await response.json();
-
-        if (!data.success) {
-          throw new Error(data.error || "Yorum oluşturulamadı.");
-        }
-
-        picked = [
-          currentType === "coffee" ? "Fincanının yorumu" : "Elinin yorumu",
-          data.fortune
-        ];
-
-        if (note) picked[1] += "\n\nNiyetin: " + note;
-
-        historyTitle = titles[currentType];
-
-        result.innerHTML =
-          `<h3>${escapeHtml(picked[0])}</h3>
-          <p style="white-space:pre-line">${escapeHtml(picked[1])}</p>
-          <p class="disclaimer">Bu yorum yapay zekâ tarafından fotoğrafın incelenmesiyle oluşturulmuştur. Eğlence amaçlıdır, kesin gelecek tahmini değildir.</p>`;
-
-        const history = loadHistory();
-        history.unshift({
-          type: currentType,
-          title: historyTitle,
-          heading: picked[0],
-          content: picked[1],
-          date: new Date().toLocaleString("tr-TR")
-        });
-
-        saveHistory(history);
-        renderHistory();
-
-      } catch (error) {
-        result.innerHTML =
-          `<p>Yorum oluşturulamadı: ${escapeHtml(error.message)}</p>`;
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalText;
-      }
-
-      return;
+      if (!requiredPhoto || !requiredPhoto.type.startsWith("image/")) { alert("Onaylı bir fotoğraf seçmelisin."); return; }
     }
-
     if (currentType === "tarot") {
-      if (selectedTarot.length !== 3) {
-        alert("Tarot yorumu için üç kart seçmelisin.");
-        return;
-      }
-
-      const drawn = selectedTarot.map(i => visibleTarot[i]);
-      picked = [
-        "Üç kartın mesajı",
-        drawn.map((card, i) =>
-          `${["Geçmiş", "Şimdi", "Olası yön"][i]} — ${card.name}: ${card.meaning}`
-        ).join("\n\n")
-      ];
-
-      if (note) picked[1] += `\n\nNiyetin: “${note}”.`;
-      historyTitle = "Tarot · " + drawn.map(c => c.name).join(" / ");
-
-    } else {
+      if(selectedTarot.length !== 3) { alert("Tarot yorumu için üç kart seçmelisin."); return; }
+      const drawn = selectedTarot.map(i=>visibleTarot[i]);
+      picked = ["Üç kartın mesajı", drawn.map((card,i)=>`${["Geçmiş","Şimdi","Olası yön"][i]} — ${card.name}: ${card.meaning}`).join("\n\n")];
+      if(note) picked[1] += `\n\nNiyetin: “${note}”. Bu konuda kontrol edebildiğin küçük bir adımı belirlemek sana yardımcı olabilir.`;
+      historyTitle = "Tarot · " + drawn.map(c=>c.name).join(" / ");
+    } else if (currentType === "daily") {
       const horoscope = dailyHoroscope($("#zodiac-sign").value);
       picked = [horoscope.heading, horoscope.content];
       historyTitle = horoscope.title;
+    } else {
+      const options = copy[currentType];
+      picked = options[Math.floor(Math.random() * options.length)];
+      let content = picked[1];
+      if ((currentType === "coffee" || currentType === "hand") && note) content += ` Yazdığın niyet üzerine düşünmek için: “${note}” konusunda atabileceğin en küçük somut adım ne olabilir?`;
+      if (note) content += ` Niyetin “${note}” ise, bu konudaki kontrol edebildiğin küçük bir adıma odaklanmayı deneyebilirsin.`;
+      picked = [picked[0], content];
     }
-
-    result.innerHTML =
-      `<h3>${escapeHtml(picked[0])}</h3>
-      <p style="white-space:pre-line">${escapeHtml(picked[1])}</p>
-      <p class="disclaimer">Sembolik ve eğlence amaçlı bir yorumdur; kesin gelecek tahmini değildir.</p>`;
-
+    result.innerHTML = `<h3>${escapeHtml(picked[0])}</h3><p style="white-space:pre-line">${escapeHtml(picked[1])}</p><p class="disclaimer">${currentType === "daily" ? "Burç yorumu tarihe göre değişen örnek metinlerden oluşur; kişiye özel astroloji analizi değildir." : currentType === "tarot" ? "Kartları sen seçtin; yorum seçilen kartların sembolik anlamlarından oluşturuldu. Kesin gelecek tahmini değildir." : "Bu ücretsiz demo fotoğrafları henüz yapay zekâyla analiz etmez; fotoğraflar cihazında kalır ve yorum örnek metinlerden oluşur. Gerçek fotoğraf analizi için görsel tanıma hizmeti gerekir."}</p>`;
     result.classList.remove("hidden");
-
     const history = loadHistory();
-    history.unshift({
-      type: currentType,
-      title: historyTitle,
-      heading: picked[0],
-      content: picked[1],
-      date: new Date().toLocaleString("tr-TR")
-    });
-
-    saveHistory(history);
-    renderHistory();
+    history.unshift({type:currentType,title:historyTitle,heading:picked[0],content:picked[1],date:new Date().toLocaleString("tr-TR")});
+    saveHistory(history); renderHistory();
   });
-
   renderHistory();
 })();
 
