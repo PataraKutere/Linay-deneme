@@ -30,8 +30,8 @@
 </section>
 <section class="notice">
 <span class="notice-icon">ⓘ</span>
-<p><strong>Kamera ve Akıllı Doğrulama Aktif</strong>
-Kahve ve el falları yalnızca doğrudan kamera ile çekilebilir; yapay zekâ görselinizi analiz eder.</p>
+<p><strong>Kamera ve Galeri Yükleme Aktif</strong>
+Kahve ve el falları için isterseniz anlık kamera çekimi yapabilir isterseniz galerinizden fotoğraf yükleyebilirsiniz.</p>
 </section>
 <section class="section-head">
 <div><div class="eyebrow">KEŞFET</div><h2>Şu an neye ihtiyacın var?</h2></div>
@@ -43,7 +43,7 @@ Kahve ve el falları yalnızca doğrudan kamera ile çekilebilir; yapay zekâ g�
 </button>
 <button class="feature-card coffee" data-open="coffee">
 <span class="card-icon">◒</span><span class="card-label">KAHVE FALI</span>
-<strong>Fincanındaki izler</strong><span class="card-desc">Kamerayla çek, niyetini yaz</span><span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+<strong>Fincanındaki izler</strong><span class="card-desc">Kamerayla çek veya galeriden yükle</span><span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
 </button>
 <button class="feature-card daily" data-open="daily">
 <span class="card-icon">☼</span><span class="card-label">GÜNLÜK BURÇ YORUMU</span>
@@ -51,7 +51,7 @@ Kahve ve el falları yalnızca doğrudan kamera ile çekilebilir; yapay zekâ g�
 </button>
 <button class="feature-card hand" data-open="hand">
 <span class="card-icon hand-mark"><svg viewBox="0 0 48 48" width="38" height="38" fill="none" aria-hidden="true"><path d="M15 24V12.5a2.7 2.7 0 0 1 5.4 0V22 9.5a2.7 2.7 0 0 1 5.4 0V22 11.5a2.7 2.7 0 0 1 5.4 0V23 15a2.7 2.7 0 0 1 5.4 0v15.5c0 7.2-4.7 12-11.8 12h-2.5c-4.2 0-6.6-2.1-8.5-5.3l-5-8.1a2.8 2.8 0 0 1 4.7-3L15 30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.4 31.5c2.8-2.4 6.2-2.8 9.1-.8" stroke="#c9a0b6" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="card-label">EL FALI</span>
-<strong>Avucunun çizgileri</strong><span class="card-desc">Kamerayla elini çek, analiz et</span><span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+<strong>Avucunun çizgileri</strong><span class="card-desc">Kamerayla çek veya galeriden yükle</span><span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
 </button>
 </section>
 <section id="reader" class="reader hidden" aria-live="polite">
@@ -117,11 +117,11 @@ const labels = {tarot:"TAROT AÇILIMI", coffee:"KAHVE FALI", daily:"GÜNLÜK BUR
 
 const uploadLayouts = {
 coffee: [
-["cup1", "Fincan 1 · Kamera Zorunlu", "Kamerayla fincanın içini net çek.", true],
+["cup1", "Fincan 1 · Fotoğraf Zorunlu", "Kamerayla çek veya galeriden seç.", true],
 ["cup2", "Fincan 2 · Opsiyonel", "Farklı açıdan fincan fotoğrafı.", false]
 ],
 hand: [
-["palm", "Avuç içi · Kamera Zorunlu", "Kamerayla avuç içinin çizgilerini net çek.", true],
+["palm", "Avuç içi · Fotoğraf Zorunlu", "Kamerayla çek veya galeriden seç.", true],
 ["handback", "Elin üstü · Opsiyonel", "Elinin üst tarafı.", false]
 ]
 };
@@ -152,12 +152,12 @@ let warningMsg = "";
 if (type === 'coffee') {
 if (brightness > 245 || brightness < 10) {
 isValid = false;
-warningMsg = "Uyarı: Fincan algılanamadı! Fotoğraf çok karanlık, aşırı parlak veya boş bir duvar/nesne. Lütfen fincan telvelerini gösteren doğru bir kahve fincanı fotoğrafı çekin.";
+warningMsg = "Uyarı: Fincan algılanamadı! Fotoğraf çok karanlık, aşırı parlak veya boş bir duvar/nesne. Lütfen net bir kahve fincanı fotoğrafı seçin.";
 }
 } else if (type === 'hand') {
 if (brightness < 25 || brightness > 250) {
 isValid = false;
-warningMsg = "Uyarı: Avuç içi çizgileri algılanamadı! Lütfen elinizi kameraya net ve uygun ışıkta yaklaştırarak tekrar çekin.";
+warningMsg = "Uyarı: Avuç içi çizgileri algılanamadı! Lütfen elinizi net ve uygun ışıkta gösteren bir fotoğraf seçin.";
 }
 }
 
@@ -174,7 +174,7 @@ const isCoffee = type === "coffee";
 Object.keys(approvedPhotos).forEach(k => delete approvedPhotos[k]);
 Object.keys(verifiedStatus).forEach(k => delete verifiedStatus[k]);
 
-upload.innerHTML = `<div class="eyebrow">${isCoffee ? "KAHVE FOTOĞRAFLARI (KAMERA)" : "EL FOTOĞRAFLARI (KAMERA)"}</div><p style="font-size:12px;line-height:1.6;color:var(--muted)">${isCoffee ? "Sadece canlı kamera çekimi kabul edilir. Yapay zekâ fincanı inceler." : "Sadece canlı kamera çekimi kabul edilir. Yapay zekâ avuç içini inceler."}</p><div class="upload-grid">${uploadLayouts[type].map(([id,title,help]) => `<div class="upload-slot" data-slot-wrap="${id}"><label>${title}</label><small>${help}</small><div class="photo-actions"><button type="button" class="photo-choice" data-camera="${id}">Kamerayla Anlık Çek</button></div><input id="camera-${id}" data-camera-input="${id}" type="file" accept="image/*" capture="environment" hidden><img id="preview-${id}" class="photo-preview hidden" alt="${title} önizlemesi"><div id="status-${id}" class="photo-status hidden"></div><div id="warning-${id}" class="upload-warning hidden"></div><div id="actions-${id}" class="photo-actions hidden"><button type="button" class="approve-photo" data-approve="${id}">Bu fotoğrafı onayla</button><button type="button" class="reject-photo" data-reject="${id}">Yeniden Çek</button></div></div>`).join("")}</div><div class="upload-warning">Akıllı Görsel Analiz: Yüklenen kareler taranır; yanlış nesneler (manzara, nesne, selfie vb.) reddedilir ve doğru görsel istenir.</div>`;
+upload.innerHTML = `<div class="eyebrow">${isCoffee ? "KAHVE FOTOĞRAFLARI (KAMERA & GALERİ)" : "EL FOTOĞRAFLARI (KAMERA & GALERİ)"}</div><p style="font-size:12px;line-height:1.6;color:var(--muted)">${isCoffee ? "Kamerayla anlık çekebilir ya da galerinizden fincan fotoğrafı yükleyebilirsiniz." : "Kamerayla anlık çekebilir ya da galerinizden avuç içi fotoğrafı yükleyebilirsiniz."}</p><div class="upload-grid">${uploadLayouts[type].map(([id,title,help]) => `<div class="upload-slot" data-slot-wrap="${id}"><label>${title}</label><small>${help}</small><div class="photo-actions"><button type="button" class="photo-choice" data-picker="${id}">Görsel Seç / Çek</button></div><input id="camera-${id}" data-camera-input="${id}" type="file" accept="image/*" hidden><img id="preview-${id}" class="photo-preview hidden" alt="${title} önizlemesi"><div id="status-${id}" class="photo-status hidden"></div><div id="warning-${id}" class="upload-warning hidden"></div><div id="actions-${id}" class="photo-actions hidden"><button type="button" class="approve-photo" data-approve="${id}">Bu fotoğrafı onayla</button><button type="button" class="reject-photo" data-reject="${id}">Yeniden Seç</button></div></div>`).join("")}</div><div class="upload-warning">Akıllı Görsel Analiz: Yüklenen kareler taranır; yanlış nesneler (manzara, nesne, selfie vb.) reddedilir ve doğru görsel istenir.</div>`;
 
 const pending = {};
 function handleFile(id, input) {
@@ -208,7 +208,11 @@ upload.querySelector(`#actions-${id}`).classList.remove("hidden");
 });
 }
 
-upload.querySelectorAll("[data-camera]").forEach(b => b.addEventListener("click", () => upload.querySelector(`#camera-${b.dataset.camera}`).click()));
+upload.querySelectorAll("[data-picker]").forEach(b => b.addEventListener("click", () => {
+const id = b.dataset.picker;
+upload.querySelector(`#camera-${id}`).click();
+}));
+
 upload.querySelectorAll("[data-camera-input]").forEach(input => input.addEventListener("change", () => handleFile(input.dataset.cameraInput, input)));
 
 upload.querySelectorAll("[data-approve]").forEach(b => b.addEventListener("click", () => {
@@ -321,7 +325,6 @@ function saveHistory(items) {
 try { localStorage.setItem("linay-history", JSON.stringify(items.slice(0, 12))); } catch {}
 }
 
-// Çakışmayı önlemek için fonksiyon adı 'openReader' olarak güncellendi
 function openReader(type) {
 currentType = type;
 $("#reader-eyebrow").textContent = labels[type];
@@ -384,7 +387,7 @@ let picked, historyTitle = titles[currentType];
 if (currentType === "coffee" || currentType === "hand") {
 const requiredSlot = currentType === "coffee" ? "cup1" : "palm";
 if (!verifiedStatus[requiredSlot]) {
-alert(currentType === "coffee" ? "Lütfen kamerayla geçerli bir kahve fincanı fotoğrafı çekin ve onaylayın." : "Lütfen kamerayla geçerli bir avuç içi fotoğrafı çekin ve onaylayın.");
+alert(currentType === "coffee" ? "Lütfen bir kahve fincanı fotoğrafı seçin veya çekin ve onaylayın." : "Lütfen bir avuç içi fotoğrafı seçin veya çekin ve onaylayın.");
 return;
 }
 }
